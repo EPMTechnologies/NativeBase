@@ -32,8 +32,8 @@ export const useAppState = () => {
     () => ({
       getCurrentValue: () => AppState.currentState,
       subscribe: (callback: () => void) => {
-        AppState.addEventListener('change', callback);
-        return () => AppState.removeEventListener('change', callback);
+        const sb = AppState.addEventListener('change', callback);
+        return () => sb.remove();
       },
     }),
     []
